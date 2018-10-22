@@ -9,6 +9,7 @@
   "license": "SEE LICENSE IN <your-license-filename>",
   "repository": "<fill-your-repository-here>",
   "dependencies": {
+    "nativescript-fonticon": "2.0.0",
     "nativescript-sqlite": "2.2.3",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-ui-gauge": "3.7.1",

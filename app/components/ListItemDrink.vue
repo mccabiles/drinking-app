@@ -1,6 +1,8 @@
 <template>
   <GridLayout columns="*, 4*, *" rows="auto, auto">
-    <Label col="0" row="0" /> <!-- for icon -->
+    <Button col="0" row="0" class="btn btn-outline btn-rounded-lg">
+      <Span class="fa" text.decode="&#xf0fc;"/>
+    </Button>
 
     <StackLayout col="1" row="0">
       <Label> {{ drink.name }} </Label>

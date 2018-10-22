@@ -1,7 +1,7 @@
 <template>
-  <TabView androidTabsPosition="bottom">
+  <TabView androidTabsPosition="top">
     <TabViewItem title="Session">
-      <TabViewSession :drinks="activeDrinks"></TabViewSession>
+      <TabViewSession :drinks="activeDrinks" @on:drink="onDrink"></TabViewSession>
     </TabViewItem>
 
     <TabViewItem title="Drinks">
@@ -27,6 +27,17 @@
 
       drinks () {
         return this.$store.getters['drinks/drinks'];
+      }
+    },
+
+    methods: {
+      onDrink (alcoholLevel) {
+        this.$store.dispatch('user/increaseAlcoholLevel', alcoholLevel);
+        alert({
+          title: "",
+          message: "Your alcohol level has increased!",
+          okButtonText: "OK"
+        })
       }
     }
   }

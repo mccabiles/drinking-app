@@ -20,8 +20,9 @@
             TabNavigation
         },
 
-        mounted () {
-            this.$store.dispatch('drinks/getDrinks');
+        async mounted () {
+            await this.$store.dispatch('drinks/getDrinks');
+            await this.$store.dispatch('user/loadAlcoholLevel');
         },
     };
 </script>
