@@ -1,5 +1,5 @@
 <template>
-  <GridLayout columns="*, 4*, *" rows="auto">
+  <GridLayout columns="*, 4*, *" rows="auto, auto">
     <Label col="0" row="0" /> <!-- for icon -->
 
     <StackLayout col="1" row="0">
@@ -7,7 +7,8 @@
       <Label> {{ drink.servingSize }} ml | {{ drink.alcoholContent | percentage }} </Label>
       <Label> {{ standardDrinks(drink) }} Standard Drinks per Serving </Label>
     </StackLayout>
-    <slot :drink="drink"></slot>
+    <slot class="m-b-10" col="2" row="0" rowSpan="2" :drink="drink"></slot>
+    <StackLayout col="0" colSpan="3" row="1" class="hr-light m-10"></StackLayout>
   </GridLayout>
 </template>
 

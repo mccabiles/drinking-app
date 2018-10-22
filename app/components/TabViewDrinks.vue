@@ -1,14 +1,17 @@
 <template>
-  <ScrollView>
-    <StackLayout height="100%">
-      <ListItemDrink v-for="drink in drinks" :drink="drink">
-        <Switch col="2" row="0" rowSpan="2" 
-          :checked="drink.active > 0"
-          @checkedChange="onUpdate(drink)"
-        />
-      </ListItemDrink>
-    </StackLayout>
-  </ScrollView>
+  <StackLayout>
+    <Label class="p-l-2 h1" text="Drinks"></Label>
+    <ScrollView>
+      <StackLayout class="m-b-10">
+        <ListItemDrink v-for="drink in drinks" :drink="drink">
+          <Switch 
+            :checked="drink.active > 0"
+            @checkedChange="onUpdate(drink)"
+          />
+        </ListItemDrink>
+      </StackLayout>
+    </ScrollView>
+  </StackLayout>
 </template>
 
 <script>  
