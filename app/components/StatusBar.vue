@@ -1,16 +1,21 @@
 <template>
-  <GridLayout columns="3" rows="auto">
-    <Label text="Alcohol Level" col="0" row="0"/>
-  </GridLayout>
+  <ProgressBarCircular :progress="alcoholLevel">
+    <Label text="Alcohol Level"/>
+  </ProgressBarCircular>
 </template>
 
 <script>
+  import ProgressBarCircular from './ProgressBarCircular'
   export default {
     name: 'StatusBar',
+    components: {
+      ProgressBarCircular
+    },
+
     props: {
       alcoholLevel: {
         type: [Number, String],
-        default: 0
+        default: 20
       }
     }
   }

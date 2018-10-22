@@ -11,6 +11,7 @@
   "dependencies": {
     "nativescript-sqlite": "2.2.3",
     "nativescript-theme-core": "^1.0.4",
+    "nativescript-ui-gauge": "3.7.1",
     "nativescript-vue": "^2.0.0",
     "tns-core-modules": "^4.2.1",
     "vuex": "3.0.1"

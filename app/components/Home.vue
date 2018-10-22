@@ -4,16 +4,19 @@
             <Label class="action-bar-title" text="Drinkr"></Label>
         </ActionBar>
 
-        <GridLayout>
+        <StackLayout>
+            <StatusBar></StatusBar>
             <TabNavigation></TabNavigation>
-        </GridLayout>
+        </StackLayout>
     </Page>
 </template>
 
 <script>
     import TabNavigation from './TabNavigation'
+    import StatusBar from './StatusBar'
     export default {
         components: {
+            StatusBar,
             TabNavigation
         },
 

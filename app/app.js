@@ -4,6 +4,8 @@ import stores from './store/index'
 import Home from "./components/Home"
 import DatabaseSetup from './database/bootstrap'
 
+var RadRadialGauge = require('nativescript-ui-gauge/vue');
+
 // Create the database for local storage:
 const db = DatabaseSetup();
 
