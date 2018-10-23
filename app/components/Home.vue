@@ -3,7 +3,6 @@
         <ActionBar class="action-bar">
             <Label class="action-bar-title" text="Drinkr"></Label>
         </ActionBar>
-
         <StackLayout>
             <StatusBar></StatusBar>
             <TabNavigation></TabNavigation>
@@ -20,11 +19,10 @@
             TabNavigation
         },
 
-        async mounted () {
+        async created () {
             await this.$store.dispatch('drinks/getDrinks');
-            await this.$store.dispatch('consumption/getConsumptions');
-            await this.$store.dispatch('consumption/startTimer');
-            // await this.$store.dispatch('user/loadAlcoholLevel');
+            setInterval(() => this.$store.dispatch('consumption/getConsumptions'), 1000);
+            this.$store.dispatch('consumption/startTimer');
         },
     };
 </script>
