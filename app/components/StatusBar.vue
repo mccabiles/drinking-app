@@ -1,7 +1,9 @@
 <template>
-  <ProgressBarCircular :progress="alcoholLevel">
-    <Label text="Alcohol Level"/>
-  </ProgressBarCircular>
+  <StackLayout>
+    <ProgressBarCircular :amount="percentageLevel" />
+    <Label horizontalAlignment="center" text="Alcohol Level"/>
+    <Label horizontalAlignment="center" :text="`${alcoholLevel | decimal} / ${threshold} `"/>
+  </StackLayout>
 </template>
 
 <script>
@@ -12,19 +14,27 @@
       ProgressBarCircular
     },
 
+    filters: {
+      decimal (val) {
+        return parseFloat(val).toFixed(2);
+      }
+    },
+
     computed: {
       threshold () {
-        return 20;
+        return 15;
       },
 
       percentageLevel () {
-        /*console.log(`STATUSBAR: PercentageLevel = alcoholLevel[ ${this.alcoholLevel} ]
-          percentage [ ${Math.round((this.alcoholLevel / this.threshold) * 100)} ]`)
-        return Math.round((this.alcoholLevel / this.threshold) * 100);*/
+        return Math.round((this.alcoholLevel / this.threshold) * 100);
       },
 
       alcoholLevel () {
-        return this.$store.getters['user/alcoholLevel'];
+        return this.$store.getters['consumption/alcoholLevel'];
+      },
+
+      consumptions () {
+        return this.$store.getters['consumption/consumptions' ];
       }
     }
   }

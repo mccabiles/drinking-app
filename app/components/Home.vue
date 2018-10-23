@@ -22,7 +22,9 @@
 
         async mounted () {
             await this.$store.dispatch('drinks/getDrinks');
-            await this.$store.dispatch('user/loadAlcoholLevel');
+            await this.$store.dispatch('consumption/getConsumptions');
+            await this.$store.dispatch('consumption/startTimer');
+            // await this.$store.dispatch('user/loadAlcoholLevel');
         },
     };
 </script>

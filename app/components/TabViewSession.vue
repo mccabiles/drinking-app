@@ -11,6 +11,7 @@
 
     <Label v-if="drinks.length < 1" 
       class="text-muted" 
+      height="100%"
       horizontalAlignment="center"
       verticalAlignment="center" 
       text="What are we drinking tonight?"

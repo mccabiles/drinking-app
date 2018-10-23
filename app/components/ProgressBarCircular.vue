@@ -25,13 +25,17 @@
 export default {
     props: {
         size: { default: 100 },
-        progress: { default: 0 },
+        amount: { default: 0 },
         offset: { default: 0 },
         textColor: { default: "#bfbfc4" },
         fillColor: { default: "#FDA458" },
         fillBackgroundColor: { default: "#efeff4" }
     },
     computed: {
+        progress () {
+            return (isNaN(this.amount)) ? 0
+            : parseFloat(this.amount);
+        },
         height() {
             return Math.min(this.size, 250);
         },
