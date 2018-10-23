@@ -23,7 +23,7 @@ const actions = {
 
   increaseAlcoholLevel: ({ state, commit }, level) => {
     commit('increaseAlcoholLevel', level);
-    settings.setNumber('alcoholLevel', state.alcoholLevel);
+    // settings.setNumber('alcoholLevel', state.alcoholLevel);
   }
 };
 

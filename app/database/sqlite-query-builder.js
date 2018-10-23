@@ -71,6 +71,12 @@ const insertRows = async (table_name, columns, rows) => {
   }
 }
 
+const dropTable = async (table_name) => {
+  let database = await new Sqlite(DATABASE);
+  let query = `DROP TABLE IF EXISTS ${table_name};`;
+  return database.execSQL(query);
+};
+
 const updateRow = async (table_name, id, fields) => {
   console.log(`DB: updateRow ${table_name} ${id}`)
   try {
@@ -97,6 +103,7 @@ const updateRow = async (table_name, id, fields) => {
 
 export default {
   createTable,
+  dropTable,
   selectRows,
   insertRows,
   updateRow

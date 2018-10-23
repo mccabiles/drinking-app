@@ -1,4 +1,5 @@
 import drinks from '@/api/drinks.sqlite'
+import consumption from '@/api/consumption.sqlite'
 
 const setupSQLite = async () => {
     var Sqlite = require( "nativescript-sqlite" );
@@ -13,6 +14,7 @@ const setupSQLite = async () => {
 const DatabaseSetup = async () => {
     await setupSQLite();
     await drinks.setup();
+    await consumption.setup();
     console.log('DB: Database setup complete!')
 }
 
