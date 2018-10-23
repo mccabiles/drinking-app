@@ -5,7 +5,6 @@ const TABLE = 'consumptions';
 
 const api = {
 	setup: async () => {
-    await sqlite.dropTable(TABLE);
     await sqlite.createTable(TABLE, FIELDS);
     console.log('Consumptions table created');
 	},
@@ -28,6 +27,11 @@ const api = {
 	  	await sqlite.insertRows(TABLE, FIELDS, rows);
 	  else
 	  	await sqlite.insertRows(TABLE, FIELDS, [ rows ]);
+  },
+
+  delete: async (id) => {
+    if (isNaN(id)) return Promise.reject();
+    await sqlite.deleteRow(id);
   }
 };
 

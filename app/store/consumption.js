@@ -12,12 +12,13 @@ let timer;
 
 const getAlcoholLevel = (arrConsumptions, timeNow) => {
 	let alcoholLevel = 0;
-  arrConsumptions.forEach(({ datetime, amount }) => {
+  arrConsumptions.forEach(({ id, datetime, amount }) => {
     let timeSince = moment(datetime, TIMEFORMAT);
     let deduction = timeNow.diff(timeSince, 'minutes');
     let net = amount - (deduction / 60);
     net = (net < 0) ? 0 : net;
     alcoholLevel += net;
+    if (net <= 0) Consumption.delete(id);
   });
   return alcoholLevel;
 };

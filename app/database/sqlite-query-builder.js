@@ -1,9 +1,8 @@
 var Sqlite = require('nativescript-sqlite');
 
 const DATABASE = 'drinkr.db'
-const RESET = false;
 
-const createTable = async (table_name, fields) => {
+const createTable = async (table_name, fields, RESET=false) => {
   try {
     let database = await new Sqlite(DATABASE);
     console.log('DB: Database opened')
@@ -101,10 +100,17 @@ const updateRow = async (table_name, id, fields) => {
   }
 }
 
+const deleteRow = async (table_name, id) => {
+  let database = await new Sqlite(DATABASE);
+  let query = `DELETE FROM ${table_name} WHERE id=${id};`;
+  return database.execSQL(query);
+}
+
 export default {
   createTable,
   dropTable,
   selectRows,
   insertRows,
-  updateRow
+  updateRow,
+  deleteRow
 }
