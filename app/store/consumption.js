@@ -42,7 +42,7 @@ const actions = {
 	startTimer: ({ commit }) => {
 		commit('setTimeNow');
 		if (timer) clearInterval(timer);
-		timer = setInterval(() => commit('setTimeNow'), 1000 * 60);
+		timer = setInterval(() => commit('setTimeNow'), 1000 * 5);
 	},
 
 	getConsumptions: async ({ commit }) => {
