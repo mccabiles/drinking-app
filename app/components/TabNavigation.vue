@@ -33,11 +33,13 @@
     methods: {
       onDrink (alcoholLevel) {
         this.$store.dispatch('user/increaseAlcoholLevel', alcoholLevel);
+        this.$store.dispatch('consumption/addConsumption', { amount: alcoholLevel });
+        
         alert({
           title: "",
           message: "Your alcohol level has increased!",
           okButtonText: "OK"
-        })
+        });
       }
     }
   }
