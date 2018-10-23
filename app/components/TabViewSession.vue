@@ -3,7 +3,7 @@
     <ScrollView>
       <StackLayout class="m-y-10">
         <ListItemDrink v-for="drink in drinks" :drink="drink" :key="drink.id">
-          <Button col="2" class="btn btn-primary btn-rounded-lg" text="G" @tap="onDrink(drink)">
+          <Button col="2" class="btn btn-primary btn-rounded-lg" text="Drink!" @tap="onDrink(drink)">
           </Button>
         </ListItemDrink>
       </StackLayout>

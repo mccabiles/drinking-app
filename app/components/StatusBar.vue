@@ -1,8 +1,11 @@
 <template>
-  <StackLayout>
-    <ProgressBarCircular :amount="percentageLevel" />
-    <Label horizontalAlignment="center" text="Alcohol Level"/>
-    <Label horizontalAlignment="center" :text="`${alcoholLevel | decimal} / ${threshold} `"/>
+  <StackLayout orientation="horizontal">
+    <Label verticalAlignment="center" text=""/>
+    <StackLayout>
+      <ProgressBarCircular :amount="percentageLevel" />
+      <Label horizontalAlignment="center" text="Alcohol Level"/>
+      <Label horizontalAlignment="center" :text="`${alcoholLevel} / ${threshold} `"/>
+    </StackLayout>
   </StackLayout>
 </template>
 
@@ -12,12 +15,6 @@
     name: 'StatusBar',
     components: {
       ProgressBarCircular
-    },
-
-    filters: {
-      decimal (val) {
-        return parseFloat(val).toFixed(2);
-      }
     },
 
     computed: {
@@ -30,7 +27,7 @@
       },
 
       alcoholLevel () {
-        return this.$store.getters['consumption/alcoholLevel'];
+        return Math.round(this.$store.getters['consumption/alcoholLevel']) || 0;
       },
 
       consumptions () {
