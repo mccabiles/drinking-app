@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import Consumption from '@/api/consumption.sqlite'
+import API from '@/api/consumption.sqlite'
+import UserAPI from '@/api/user.app-settings'
 var moment = require('moment')
 
 const state = {
@@ -10,22 +11,39 @@ const state = {
 const TIMEFORMAT = 'YYYYMMDD kk:mm:ss';
 let timer;
 
-const getAlcoholLevel = (arrConsumptions, timeNow) => {
-	let alcoholLevel = 0;
-  arrConsumptions.forEach(({ id, datetime, amount }) => {
-    let timeSince = moment(datetime, TIMEFORMAT);
+const getNetAmount = ({ datetime, amount }, timeNow) => {
+	let timeSince = moment(datetime, TIMEFORMAT);
     let deduction = timeNow.diff(timeSince, 'minutes');
     let net = amount - (deduction / 60);
-    net = (net < 0) ? 0 : net;
+    return (net < 0) ? 0 : net;
+};
+
+/*const getAlcoholLevel = (arrConsumptions, timeNow) => {
+	let alcoholLevel = 0;
+  arrConsumptions.forEach(consumption => {
+    let net = getNetAmount(consumption, timeNow);
     alcoholLevel += net;
-    if (net <= 0) Consumption.delete(id);
   });
   return alcoholLevel;
+};*/
+
+const getAlcoholLevel = (timeNow) => {
+	let { alcoholLevel, last_updated } = UserAPI.getAlcoholLevel();
+	let newLevel = getNetAmount({ datetime: last_updated, amount: alcoholLevel }, timeNow);
+	UserAPI.setAlcoholLevel(newLevel, timeNow.format(TIMEFORMAT));
+	return newLevel;
+};
+
+const getActiveConsumptions = (arrConsumptions, timeNow) => {
+	let activeConsumptions = arrConsumptions.filter(consumption => 
+		(getNetAmount(consumption, timeNow) > 0) 
+	);
 };
 
 const getters = {
 	consumptions: (state) => state.consumptions,
-	alcoholLevel: (state) => getAlcoholLevel(state.consumptions, state.timeNow)
+	activeConsumptions: (state) => getActiveConsumptions(state.consumptions, state.timeNow),
+	alcoholLevel: (state) => getAlcoholLevel(state.timeNow)
 };
 
 const mutations = {
@@ -46,12 +64,14 @@ const actions = {
 	},
 
 	getConsumptions: async ({ commit }) => {
-		let consumptions = await Consumption.getAll();
+		let consumptions = await API.getAll();
 		commit('setConsumptions', consumptions);
 	},
 
-	addConsumption: async ({ dispatch }, { amount }) => {
-		await Consumption.insert({ amount, datetime: moment().format(TIMEFORMAT)});
+	addConsumption: async ({ state, getters, dispatch }, { amount }) => {
+		await API.insert({ amount, datetime: moment().format(TIMEFORMAT)});
+		let newLevel = getters.alcoholLevel;
+		UserAPI.setAlcoholLevel(newLevel, state.timeNow);
 		dispatch('getConsumptions');
 	}
 };
