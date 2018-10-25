@@ -7,7 +7,7 @@ const api = {
   },
   
   setNumber: (key, data) => {
-    appSettings.setString(key, parseFloat(data).toFixed(2))
+    appSettings.setString(key, data)
     console.log(`saved key: ${key} = ${data}`)
   },
 
@@ -17,8 +17,8 @@ const api = {
   	return { alcoholLevel, last_updated };
   },
 
-  setAlcoholLevel: (level, timestamp) => {
-  	api.setNumber('alcoholLevel', level);
+  setAlcoholLevel: (level, momentTimestamp) => {
+  	api.setNumber('alcoholLevel', parseFloat(level).toFixed(8));
   	api.setNumber('last_updated', momentTimestamp);
   }
 };

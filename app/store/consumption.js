@@ -13,9 +13,9 @@ let timer;
 
 const getNetAmount = ({ datetime, amount }, timeNow) => {
 	let timeSince = moment(datetime, TIMEFORMAT);
-    let deduction = timeNow.diff(timeSince, 'minutes');
-    let net = amount - (deduction / 60);
-    return (net < 0) ? 0 : net;
+  let deduction = timeNow.diff(timeSince, 'seconds');
+  let net = amount - (deduction / 3600);
+  return (net < 0) ? 0 : net;
 };
 
 /*const getAlcoholLevel = (arrConsumptions, timeNow) => {
@@ -30,6 +30,7 @@ const getNetAmount = ({ datetime, amount }, timeNow) => {
 const getAlcoholLevel = (timeNow) => {
 	let { alcoholLevel, last_updated } = UserAPI.getAlcoholLevel();
 	let newLevel = getNetAmount({ datetime: last_updated, amount: alcoholLevel }, timeNow);
+	if (isNaN(newLevel)) newLevel = 0;
 	UserAPI.setAlcoholLevel(newLevel, timeNow.format(TIMEFORMAT));
 	return newLevel;
 };
@@ -70,7 +71,7 @@ const actions = {
 
 	addConsumption: async ({ state, getters, dispatch }, { amount }) => {
 		await API.insert({ amount, datetime: moment().format(TIMEFORMAT)});
-		let newLevel = getters.alcoholLevel;
+		let newLevel = getAlcoholLevel(state.timeNow) + amount;
 		UserAPI.setAlcoholLevel(newLevel, state.timeNow);
 		dispatch('getConsumptions');
 	}
