@@ -28,6 +28,11 @@ const actions = {
   updateDrink: async ({ dispatch }, data) => {
     await Drinks.update(data.id, data);
     await dispatch('getDrinks');
+  },
+
+  insertDrink: async({ dispatch }, drink) => {
+    await Drinks.insert(drink);
+    await dispatch('getDrinks');
   }
 };
 

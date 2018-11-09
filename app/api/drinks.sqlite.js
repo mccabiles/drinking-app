@@ -42,6 +42,10 @@ const api = {
 
   update: async (id, fields) => {
     return await sqlite.updateRow(TABLE, id, fields);
+  },
+
+  insert: async ({ name, alcoholContent, servingSize }) => {
+    await sqlite.insertRows(TABLE, FIELDS, [{ name, alcoholContent, servingSize, active: 0 }]);
   }
 };
 

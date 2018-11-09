@@ -2,6 +2,10 @@
     <Page class="page">
         <ActionBar class="action-bar">
             <Label class="action-bar-title" text="Drinkr"></Label>
+            <NavigationButton 
+                android.systemIcon="ic_menu_add" 
+                @tap="showAddDrink"
+            />
         </ActionBar>
         <StackLayout>
             <StatusBar></StatusBar>
@@ -11,10 +15,13 @@
 </template>
 
 <script>
+    import DrinkDetails from './DrinkDetails'
     import TabNavigation from './TabNavigation'
     import StatusBar from './StatusBar'
+
     export default {
         components: {
+            DrinkDetails,
             StatusBar,
             TabNavigation
         },
@@ -24,6 +31,12 @@
             setInterval(() => this.$store.dispatch('consumption/getConsumptions'), 1000);
             this.$store.dispatch('consumption/startTimer');
         },
+
+        methods: {
+            showAddDrink() {
+                this.$showModal(DrinkDetails)
+            }
+        }
     };
 </script>
 
