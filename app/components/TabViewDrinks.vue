@@ -8,8 +8,8 @@
           @checkedChange="onUpdate(drink)"
         />
         <FlexboxLayout slot="ud-btns" col="0" flexDirection="column">
-          <Button text.decode="&#xf044;" class="fa ud-btn btn-primary btn-active"/>
-          <Button text.decode="&#xf1f8;" class="fa ud-btn btn-danger btn-active"/>
+          <Button text.decode="&#xf044;" class="fa ud-btn btn-primary btn-active" @tap="showEditDrink"/>
+          <Button text.decode="&#xf1f8;" class="fa ud-btn btn-danger btn-active" @tap="showDeleteDrink(drink)"/>
         </FlexboxLayout>
       </ListItemDrink>
     </StackLayout>
@@ -19,11 +19,16 @@
 <script>
   import { mapActions } from 'vuex'
   import ListItemDrink from './ListItemDrink'
+  import DrinkDetails from './DrinkDetails'
+  import DrinkDelete from './DrinkDelete'
+
   export default {
     name: 'TabViewDrinks',
 
     components: {
-      ListItemDrink
+      ListItemDrink,
+      DrinkDetails,
+      DrinkDelete,
     },
 
     props: {
@@ -43,12 +48,20 @@
         console.log('update')
         if(active > 0) await this.updateDrink({ id, active: 0 });
         else await this.updateDrink({ id, active: 1 });
+      },
+
+      showEditDrink() {
+        this.$showModal(DrinkDetails)
+      },
+
+      showDeleteDrink(drink) {
+        this.$showModal(DrinkDelete, {props: {drink: drink}})
       }
     }
   }
 </script>
 
-<style scoped>
+<style>
 .ud-btn {
   margin: 0px !important;
   padding: 0px !important;

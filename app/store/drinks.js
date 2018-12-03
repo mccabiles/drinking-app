@@ -33,6 +33,11 @@ const actions = {
   insertDrink: async({ dispatch }, drink) => {
     await Drinks.insert(drink);
     await dispatch('getDrinks');
+  },
+
+  deleteDrink: async({ dispatch }, drink) => {
+    await Drinks.delete(drink);
+    await dispatch('getDrinks');
   }
 };
 

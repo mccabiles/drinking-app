@@ -32,7 +32,7 @@ const api = {
     let drink_objects = drinks.map(drink => {
       let drink_obj = {};
       drink_obj.id = drink[0];
-      
+
       for (let i = 0; i < fields.length; i++)
         drink_obj[fields[i]] = drink[i+1];
       return drink_obj;
@@ -46,7 +46,11 @@ const api = {
 
   insert: async ({ name, alcoholContent, servingSize }) => {
     await sqlite.insertRows(TABLE, FIELDS, [{ name, alcoholContent, servingSize, active: 0 }]);
-  }
+  },
+
+  delete: async ({ id }) => {
+    return await sqlite.deleteRow(TABLE, id);
+  },
 };
 
 export default api;
