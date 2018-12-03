@@ -8,7 +8,7 @@
           @checkedChange="onUpdate(drink)"
         />
         <FlexboxLayout slot="ud-btns" col="0" flexDirection="column">
-          <Button text.decode="&#xf044;" class="fa ud-btn btn-primary btn-active" @tap="showEditDrink"/>
+          <Button text.decode="&#xf044;" class="fa ud-btn btn-primary btn-active" @tap="showEditDrink(drink)"/>
           <Button text.decode="&#xf1f8;" class="fa ud-btn btn-danger btn-active" @tap="showDeleteDrink(drink)"/>
         </FlexboxLayout>
       </ListItemDrink>
@@ -50,8 +50,8 @@
         else await this.updateDrink({ id, active: 1 });
       },
 
-      showEditDrink() {
-        this.$showModal(DrinkDetails)
+      showEditDrink(drink) {
+        this.$showModal(DrinkDetails, {props: {drink: drink}})
       },
 
       showDeleteDrink(drink) {
@@ -63,8 +63,6 @@
 
 <style>
 .ud-btn {
-  margin: 0px !important;
-  padding: 0px !important;
   width: 150px !important;
 }
 
