@@ -2,17 +2,21 @@
   <ScrollView>
     <StackLayout class="m-y-10">
       <ListItemDrink v-for="drink in drinks" :drink="drink" :key="drink.id">
-        <Switch 
-          col="2"
+        <Switch
+          col="3"
           :checked="drink.active > 0"
           @checkedChange="onUpdate(drink)"
         />
+        <FlexboxLayout slot="ud-btns" col="0" flexDirection="column">
+          <Button text.decode="&#xf044;" class="fa ud-btn btn-primary btn-active"/>
+          <Button text.decode="&#xf1f8;" class="fa ud-btn btn-danger btn-active"/>
+        </FlexboxLayout>
       </ListItemDrink>
     </StackLayout>
   </ScrollView>
 </template>
 
-<script>  
+<script>
   import { mapActions } from 'vuex'
   import ListItemDrink from './ListItemDrink'
   export default {
@@ -43,3 +47,16 @@
     }
   }
 </script>
+
+<style scoped>
+.ud-btn {
+  margin: 0px !important;
+  padding: 0px !important;
+  width: 150px !important;
+}
+
+.btn-danger {
+  background-color: #ff3333;
+  color: white;
+}
+</style>

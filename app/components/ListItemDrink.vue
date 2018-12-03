@@ -1,23 +1,24 @@
 <template>
-  <GridLayout columns="*, 4*, 2*" rows="auto, auto">
-    <Button col="0" row="0" class="btn btn-outline btn-rounded-lg">
+  <GridLayout columns="auto, *, 4*, 2*" rows="auto, auto">
+    <slot name="ud-btns" col="0" row="0"></slot>
+    <Button col="1" row="0" class="btn btn-outline btn-rounded-lg">
       <Span class="fa" text.decode="&#xf0fc;"/>
     </Button>
 
-    <StackLayout col="1" row="0">
+    <StackLayout col="2" row="0">
       <Label> {{ drink.name }} </Label>
       <Label> {{ drink.servingSize }} ml | {{ drink.alcoholContent | percentage }} </Label>
       <Label> {{ standardDrinks(drink) }} Standard Drinks per Serving </Label>
     </StackLayout>
-    <slot class="m-b-10" col="2" row="0" rowSpan="2" :drink="drink"></slot>
-    <StackLayout col="0" colSpan="3" row="1" class="hr-light m-10"></StackLayout>
+    <slot class="m-b-10" col="3" row="0" rowSpan="2" :drink="drink"></slot>
+    <StackLayout col="0" colSpan="4" row="1" class="hr-light m-10"></StackLayout>
   </GridLayout>
 </template>
 
 <script>
   export default {
     name: 'ListItemDrink',
-    
+
     props: {
       drink: {
         type: Object,
