@@ -1,17 +1,20 @@
 import settings from '@/api/user.app-settings'
 
 const state = {
-  alcoholLevel: 0
+  alcoholLevel: 0,
+  threshold: 15
 };
 
 const getters = {
-  alcoholLevel: (state) =>  Math.round(state.alcoholLevel)
+  alcoholLevel: (state) =>  Math.round(state.alcoholLevel),
+  threshold: (state) =>  Math.round(state.threshold)
 };
 
 const mutations = {
   setAlcoholLevel: (state, newLevel) => state.alcoholLevel = parseFloat(newLevel),
   increaseAlcoholLevel: (state, addLevel) => 
     state.alcoholLevel = parseFloat(addLevel) + parseFloat(state.alcoholLevel),
+  setThreshold: (state, newThreshold) => state.threshold = parseFloat(newThreshold),
 };
 
 const actions = {
