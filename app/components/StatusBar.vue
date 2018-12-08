@@ -1,12 +1,13 @@
+
 <template>
   <GridLayout columns="*, *" rows="auto">
     <StackLayout col="1">
       <ProgressBarCircular :amount="percentageLevel" />
-      <Label horizontalAlignment="center" text="Alcohol Level"/>
-      <Label horizontalAlignment="center" :text="`${alcoholLevel} / ${threshold} `"/>
+       <Label horizontalAlignment="center" text="Alcohol Level"/>
+     <Label horizontalAlignment="center" :text="`${alcoholLevel} / ${threshold} `"/>
     </StackLayout>
-
-    <StatusBarText col="0" :level="alcoholLevel"></StatusBarText>
+    
+   <StatusBarText col="0" :level="alcoholLevel"></StatusBarText>
   </GridLayout>
 </template>
 
@@ -22,7 +23,7 @@
 
     computed: {
       threshold () {
-        return 15;
+        return this.$store.getters['user/threshold']
       },
 
       percentageLevel () {
@@ -37,5 +38,5 @@
         return this.$store.getters['consumption/consumptions' ];
       }
     }
-  }
+}
 </script>
