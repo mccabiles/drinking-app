@@ -6,6 +6,10 @@
                 android.systemIcon="ic_menu_add" 
                 @tap="showAddDrink"
             />
+            <ActionItem position="right"
+                android.systemIcon="ic_menu_edit" 
+                @tap="showSetLimit"
+            ></ActionItem>
         </ActionBar>
         <StackLayout>
             <StatusBar></StatusBar>
@@ -18,12 +22,13 @@
     import DrinkDetails from './DrinkDetails'
     import TabNavigation from './TabNavigation'
     import StatusBar from './StatusBar'
-
+    import SetLimit from './SetLimit'
     export default {
         components: {
             DrinkDetails,
             StatusBar,
-            TabNavigation
+            TabNavigation,
+            SetLimit
         },
 
         async created () {
@@ -35,6 +40,9 @@
         methods: {
             showAddDrink() {
                 this.$showModal(DrinkDetails)
+            },
+            showSetLimit() {
+                this.$showModal(SetLimit)
             }
         }
     };
