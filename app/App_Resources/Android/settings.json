@@ -1,1 +1,5 @@
-{"appId":"org.nativescript.cs173DrinksApp","minSdkVersion":null,"targetSdkVersion":null}
+{
+  "appId": "org.nativescript.cs173DrinksApp",
+  "minSdkVersion": 25,
+  "targetSdkVersion": 25
+}
