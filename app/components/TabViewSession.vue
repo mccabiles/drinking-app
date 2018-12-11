@@ -3,23 +3,23 @@
     <ScrollView>
       <StackLayout class="m-y-10">
         <ListItemDrink v-for="drink in drinks" :drink="drink" :key="drink.id">
-          <Button col="2" class="btn btn-primary btn-rounded-lg" text="Drink!" @tap="onDrink(drink)">
+          <Button col="3" class="btn btn-primary btn-rounded-lg" text="Drink!" @tap="onDrink(drink)">
           </Button>
         </ListItemDrink>
       </StackLayout>
     </ScrollView>
 
-    <Label v-if="drinks.length < 1" 
-      class="text-muted" 
+    <Label v-if="drinks.length < 1"
+      class="text-muted"
       height="100%"
       horizontalAlignment="center"
-      verticalAlignment="center" 
+      verticalAlignment="center"
       text="What are we drinking tonight?"
     />
   </StackLayout>
 </template>
 
-<script>  
+<script>
   import ListItemDrink from './ListItemDrink'
   export default {
     components: {
