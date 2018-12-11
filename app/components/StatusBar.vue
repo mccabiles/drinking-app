@@ -7,7 +7,7 @@
       <Label horizontalAlignment="center" :text="`${alcoholLevel} / ${threshold} `"/>
     </StackLayout>
     
-    <StatusBarText col="0" row="0" :level="alcoholLevel"></StatusBarText>
+    <StatusBarText col="0" row="0" :level="alcoholLevel" :percentage="percentageLevel"></StatusBarText>
     <NormalizationTimer 
       col="0" colSpan="2" row="1"
       :value="alcoholLevel"
@@ -45,10 +45,6 @@
       consumptions () {
         return this.$store.getters['consumption/consumptions' ];
       }
-    },
-
-    created() {
-      setInterval(() => this.$store.dispatch('user/getThreshold'), 1500);
     },
 }
 </script>
