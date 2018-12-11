@@ -27,7 +27,18 @@ const actions = {
   increaseAlcoholLevel: ({ state, commit }, level) => {
     commit('increaseAlcoholLevel', level);
     // settings.setNumber('alcoholLevel', state.alcoholLevel);
-  }
+  },
+
+  getThreshold: ({ state, commit }) => {
+    const threshold = settings.getThreshold();
+    console.info(`got threshold: ${threshold}`);
+    commit('setThreshold', threshold);
+  },
+
+  setThreshold: ({state, dispatch}, newThreshold) => {
+    settings.setThreshold(newThreshold);
+    dispatch('getThreshold');
+  },
 };
 
 export default {

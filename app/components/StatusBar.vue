@@ -37,6 +37,10 @@
       consumptions () {
         return this.$store.getters['consumption/consumptions' ];
       }
-    }
+    },
+
+    mounted() {
+      this.$store.dispatch('user/getThreshold');
+    },
 }
 </script>
