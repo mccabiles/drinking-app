@@ -1,5 +1,5 @@
 <template>
-  <Page actionBarHidden>
+  <Page class="p-15" actionBarHidden>
     <StackLayout width="100%">
       <Label text="Drink Name:"></Label>
       <TextField hint="Drink name" v-model="name"></TextField>

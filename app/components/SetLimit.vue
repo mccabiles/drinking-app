@@ -1,12 +1,14 @@
 <template>
-	<StackLayout  backgroundColor="white" >
-		<Label text="Set Limit:"></Label>   
-        <TextField 
-            keyboardType="number"
-            v-model="dataThreshold"
-        ></TextField>
-		<Button class="btn btn-outline" text="Save" @tap="save" />
-	</StackLayout>
+    <Page class="p-15">
+    	<StackLayout backgroundColor="white" >
+    		<Label text="Set Alcohol Threshold:"></Label>   
+            <TextField 
+                keyboardType="number"
+                v-model="dataThreshold"
+            ></TextField>
+    		<Button class="btn btn-outline" text="Save" @tap="save" />
+    	</StackLayout>
+    </Page>
 </template>
 
 <script>

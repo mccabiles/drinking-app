@@ -2,7 +2,8 @@
     <Page class="page">
         <ActionBar class="action-bar">
             <Label class="action-bar-title" text="Drinkr"></Label>
-            <NavigationButton 
+            <ActionItem
+                position="right" 
                 android.systemIcon="ic_menu_add" 
                 @tap="showAddDrink"
             />
@@ -10,6 +11,11 @@
                 android.systemIcon="ic_menu_edit" 
                 @tap="showSetLimit"
             ></ActionItem>
+            <ActionItem
+                position="right" 
+                android.systemIcon="ic_dialog_info" 
+                @tap="showAbout"
+            />
         </ActionBar>
         <StackLayout>
             <StatusBar></StatusBar>
@@ -19,22 +25,25 @@
 </template>
 
 <script>
+    import About from './About'
     import DrinkDetails from './DrinkDetails'
     import TabNavigation from './TabNavigation'
     import StatusBar from './StatusBar'
     import SetLimit from './SetLimit'
     export default {
         components: {
+            About,
             DrinkDetails,
             StatusBar,
             TabNavigation,
             SetLimit
         },
 
-        async created () {
-            await this.$store.dispatch('drinks/getDrinks');
+        mounted () {
+            setInterval(() => this.$store.dispatch('drinks/getDrinks'), 100);
             setInterval(() => this.$store.dispatch('consumption/getConsumptions'), 1000);
-            this.$store.dispatch('consumption/startTimer');
+            setInterval(() => this.$store.dispatch('consumption/startTimer'), 2000);
+            setInterval(() => this.$store.dispatch('user/getThreshold'), 3000);
         },
 
         methods: {
@@ -43,7 +52,10 @@
             },
             showSetLimit() {
                 this.$showModal(SetLimit)
-            }
+            },
+            showAbout() {
+                this.$showModal(About)
+            },
         }
     };
 </script>
